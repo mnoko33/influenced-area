@@ -1,0 +1,21 @@
+.loading-wrapper {
+  position: relative;
+  margin: 230px auto 0;
+  text-align: center;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-image: url('/loading.gif');
+  background-size: 300px 300px;
+  border: 5px solid rgb(255, 99, 132);
+}
+
+.loading-msg {
+  position: absolute;
+  width: 100%;
+  bottom: 40px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
+  color: rgb(255, 99, 132);
+}
