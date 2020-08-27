@@ -21,6 +21,7 @@ const api = {
     }
   },
   getResultByCoord: async (geoloc, selectedList) => {
+    console.log(geoloc)
     const result = await axios({
       method: 'get',
       url: `${BASE_URL}/area/geo`,
@@ -30,7 +31,7 @@ const api = {
       timeout: 2000,
       params: {
         geoloc,
-        selectedList
+        selectedList: JSON.stringify(selectedList)
       }
     })
     if (result.status === 200) {

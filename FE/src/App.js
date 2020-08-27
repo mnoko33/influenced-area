@@ -47,7 +47,7 @@ function App() {
       setIsLoading(true);
       navigator.geolocation.getCurrentPosition(pos => {
         const [x, y] = [pos.coords.latitude, pos.coords.longitude];
-        api.getResultByAddress(
+        api.getResultByCoord(
           {x, y}, 
           categoryList.reduce((acc, c) => c.selected ? [...acc, c.code] : acc, [])
         ).then(result => {
