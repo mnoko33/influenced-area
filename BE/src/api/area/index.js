@@ -1,5 +1,6 @@
 const Router = require('koa-router');
 const area =  new Router();
+const {coord2address} = require('../../kakao');
 
 const dummy = [
   { code: "cv", score: 90, cnt: 55 },
@@ -33,14 +34,17 @@ area.get('/address', (ctx) => {
   GET /api/area/geo
   { geo, selectedList }
 */
-area.get('/geo', (ctx) => {
-  const geoloc = ctx.query.address;
+area.get('/geo', async (ctx) => {
+  const geoloc = JSON.parse(ctx.query.geoloc);
   const selectedList = JSON.parse(ctx.query.selectedList)
+
+  const address = await coord2address(geoloc);
+  console.log('address', address);
 
   if (geoloc && selectedList.length) {
     ctx.status = 200;
     ctx.body = { 
-      geoloc,
+      address,
       data: dummy.filter(x => selectedList.includes(x.code))
     }
   } else {
