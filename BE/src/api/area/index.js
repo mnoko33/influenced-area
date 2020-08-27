@@ -15,22 +15,18 @@ const dummy = [
   { address, selectedList }
 */
 area.get('/address', (ctx) => {
-  ctx.body = { ctx }
-  // console.log(ctx.query);
-  console.log(ctx.params)
-  // console.log(ctx.res)
-  // console.log(ctx.res)
-  // console.log(ctx.req)
-  // console.log(ctx.request)
-  // console.log(ctx.params)
-  // const { address, selectedList } = ctx.params;
-  // console.log(address, selectedList);
-  // const data = dummy.filter(data => selectedList.includes(data.code));
-  // ctx.status = 200;
-  // ctx.body = {
-  //   address,
-  //   data: data
-  // }
+  const address = ctx.query.address;
+  const selectedList = JSON.parse(ctx.query.selectedList)
+  
+  if (address && selectedList.length) {
+    ctx.status = 200;
+    ctx.body = { 
+      address,
+      data: dummy.filter(x => selectedList.includes(x.code))
+    }
+  } else {
+    ctx.status = 400
+  }
 });
 
 /* GPS정보로 세권 찾기
@@ -38,7 +34,18 @@ area.get('/address', (ctx) => {
   { geo, selectedList }
 */
 area.get('/geo', (ctx) => {
-  const [{x, y}, selectedList] = ctx.params;
+  const geoloc = ctx.query.address;
+  const selectedList = JSON.parse(ctx.query.selectedList)
+
+  if (geoloc && selectedList.length) {
+    ctx.status = 200;
+    ctx.body = { 
+      geoloc,
+      data: dummy.filter(x => selectedList.includes(x.code))
+    }
+  } else {
+    ctx.status = 400
+  }
 });
 
 module.exports = area;
