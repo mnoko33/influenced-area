@@ -1,11 +1,13 @@
 const koa = require('koa');
 const Router = require('koa-router');
 const api = require('./api');
+const cors = require('@koa/cors');
 
 
 const app = new koa();
-const router = new Router();
+app.use(cors());
 
+const router = new Router();
 router.use('/api', api.routes());
 
 app.use(router.routes()).use(router.allowedMethods());
