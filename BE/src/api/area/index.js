@@ -39,7 +39,6 @@ area.get('/geo', async (ctx) => {
   const selectedList = JSON.parse(ctx.query.selectedList)
 
   const address = await coord2address(geoloc);
-  console.log('address', address);
 
   if (geoloc && selectedList.length) {
     ctx.status = 200;
